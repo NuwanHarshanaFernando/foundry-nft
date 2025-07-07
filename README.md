@@ -139,3 +139,37 @@ bytes32 catHash = keccak256(encodedCat)
 catHash
 Type: bytes32
 └ Data: 0x52763589e772702fa7977a28b3cfb6ca534f0208a2b2d55f7558af664eac478a
+
+## Interactions
+
+Create Interactions.s.sol
+
+Install foundry-devops package
+
+```shell
+$ forge install ChainAccelOrg/foundry-devops
+```
+
+## Deploy on Sepolia Testnet
+```shell
+$ make deploy ARGS="--network sepolia"
+```
+
+Go to Etherscan link, we can see the contract is verified
+
+We can see latest deployment in broadcast folder
+
+Set ffi = true in foundry.toml
+
+Instead of ffi = true 
+
+fs_permissions = [
+    { access = "read", path = "./broadcast" },
+    { access = "read", path = "./reports" },
+]
+
+## Mint 
+
+```shell
+$ make mint ARGS="--network sepolia"
+```
