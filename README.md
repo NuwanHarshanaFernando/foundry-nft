@@ -364,4 +364,124 @@ IjQiIGZpbGw9InllbGxvdyIgLz4KPC9zdmc+
 
 Add this to fs_permissions in foundry.toml
 
-{ access = "read", path = "./images/" }
+{ access = "read", path = "./img/" }
+
+```shell
+ $ forge script script/DeployMoodNft.s.sol
+```
+
+Devide Tests to units and integrations
+
+unit -> not using deployer -> deployer.run()
+integrations -> using deployer -> deployer.run()
+
+Add MoodNftIntegrationTest.t.sol under integrations
+
+Create MoodNftIntegrationTest.t.sol and copy source code from ModeNftTest.s.sol
+
+```shell
+ $ forge test --mt testViewTokenURIIntegration
+```
+
+```shell
+ $ forge test --mt testFlipTokenToSad -vvvvv
+```
+
+Difference Between unit test and integration test 
+
+In unit test, we test one specific function only and one test case
+
+    DeployMoodNftTest.t.sol ->
+    function setUp() public {
+        deployer = new DeployMoodNft();
+    }
+
+    MoodNftTest.t.sol ->
+    function setUp() public {
+        deployer = new DeployMoodNft();
+    }
+
+But in Integration Test, we test multiple functions and multiple test cases
+We combine deployer with basicNft
+
+    BasicNftTest.t.sol -> 
+    function setUp() public {
+        deployer = new DeployBasicNft();
+        basicNft = deployer.run();
+    }
+
+We combine deployer with moodNft
+
+    MoodNftTest.t.sol->
+    function setUp() public {
+        deployer = new DeployMoodNft();
+        moodNft = deployer.run();
+    }
+
+
+## Testing all test cases
+
+```shell
+ $ forge test 
+```
+6 tests passed, 0 failed
+
+## Testing on fork-urls
+```shell
+ $ forge test --fork-url $SEPOLIA_RPC_URL
+```
+6 tests passed, 0 failed
+
+## Testing on anvil chain
+```shell
+ $ make anvil
+```
+```shell
+ $ make deployMood
+```
+
+##### anvil-hardhat
+✅  [Success] Hash: 0x32d0d5e18b7e1cc63e16478f733b236959a74c27ce7ab965894691758c5954b1
+Contract Address: 0x5FbDB2315678afecb367f032d93F642f64180aa3
+Block: 6967
+Paid: 0.000000000028509616 ETH (3563702 gas * 0.000000008 gwei)
+
+## mintNft
+
+Copy the Contract Address
+
+```shell
+cast send 0x5FbDB2315678afecb367f032d93F642f64180aa3 "mintNft()" --private-key 59c6995e998f97a5a0044966f0945389dc9e86dae88c7a8412f4603b6b78690d --rpc-url http://localhost:8545
+```
+
+The private key here is the private key of Anvil imported account(In this case private key of Account6)
+The RPC_URL is rpc_url of anvil chain
+
+Then copy The Contract Address -> 0x5FbDB2315678afecb367f032d93F642f64180aa3
+
+Go to meta mask, Account6 on anvil chain.
+Import NFT
+Select Network -> Anvil
+Address -> Contract Address (0x5FbDB2315678afecb367f032d93F642f64180aa3)
+Token Id -> 0
+
+Import now.
+Now we can see the NFT in our mata mask wallet
+
+## flipMood
+
+```shell
+cast send 0x5FbDB2315678afecb367f032d93F642f64180aa3 "flipMood(uint256)" 0 --private-key 59c6995e998f97a5a0044966f0945389dc9e86dae88c7a8412f4603b6b78690d --rpc-url http://localhost:8545
+```
+
+Here 0 is tokenId
+
+Then go to meta mask
+Remove NFT
+Import NFT
+Select Network -> Anvil
+Address -> Contract Address (0x5FbDB2315678afecb367f032d93F642f64180aa3)
+Token Id -> 0
+
+Import
+Now we can see the NFT in our mata mask wallet
