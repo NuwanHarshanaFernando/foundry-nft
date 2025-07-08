@@ -338,3 +338,30 @@ Run on anvil chain
 ```shell
  make anvil
 ```
+
+Create the flipMood function
+
+## Deploy MoodNFT
+
+Create DeployMoodNft.s.sol
+
+## Test DeployMoodNft
+
+Create a file called DeployMoodNftTest.t.sol in test folder
+
+
+base64 -i ./img/example.svg and copy the output
+
+Example:
+data:image/svg+xml;base64,
+PCEtLSA8c3ZnIHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIiB4bWxucz0iaHR0cDovL3d3dy53My5v
+cmcvMjAwMC9zdmciPgogICAgPHRleHQgeD0iMCIgeT0iMTUiIGZpbGw9ImJsYWNrIj5IaSEgWW91
+ciBicm93c2VyIGRlY29kZWQgdGhpczwvdGV4dD4KPC9zdmc+IC0tPgoKPHN2ZyB3aWR0aD0iMTAw
+IiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxj
+aXJjbGUgY3g9IjUwIiBjeT0iNTAiIHI9IjQwIiBzdHJva2U9ImdyZWVuIiBzdHJva2Utd2lkdGg9
+IjQiIGZpbGw9InllbGxvdyIgLz4KPC9zdmc+
+
+
+Add this to fs_permissions in foundry.toml
+
+{ access = "read", path = "./images/" }
