@@ -42,18 +42,5 @@ deploy:
 mint:
 	@forge script script/Interactions.s.sol:MintBasicNft ${NETWORK_ARGS}
 
-After minting is ok, 
-Go to the etherscan and copy the contract address that we recently deployed 
 
-Go to Metamask
-Go to NFTs
-Select Import NFT
 
-Select the network as Sepolia
-Paste the copied contract address 
-Type 0 for Token ID because we only mint 1
-
-Enter and wait a little bit....
-
-Now we can see the NFT in our Metamask
-This is what we see in market places like OpenSea
